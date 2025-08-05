@@ -36,9 +36,7 @@ class TestUtils:
     def test_get_input_with_optional_input(self):
         """Test get_input with optional input."""
         with patch.dict(os.environ, {}, clear=True):
-            result = get_input(
-                "test_input", required=False, default="default_value"
-            )
+            result = get_input("test_input", required=False, default="default_value")
             assert result == "default_value"
 
     def test_get_input_case_insensitive(self):
@@ -54,9 +52,7 @@ class TestUtils:
             with patch("builtins.open", mock_file):
                 set_output("test_output", "test_value")
                 mock_file.assert_called_once_with("/tmp/output", "a")
-                mock_file().write.assert_called_once_with(
-                    "test_output=test_value\n"
-                )
+                mock_file().write.assert_called_once_with("test_output=test_value\n")
 
     def test_set_output_without_github_output_file(self):
         """Test set_output without GITHUB_OUTPUT file (fallback)."""
