@@ -1,1 +1,1 @@
-# Test package for Python GitHub Action Template 
+# Test package for Python GitHub Action Template

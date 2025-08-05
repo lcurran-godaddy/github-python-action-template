@@ -3,39 +3,37 @@ Utility functions for GitHub Actions integration.
 """
 
 import os
-import sys
-from typing import Optional
 
 
 def get_input(name: str, required: bool = False, default: str = "") -> str:
     """
     Get an input value from GitHub Actions.
-    
+
     Args:
         name: Name of the input parameter
         required: Whether the input is required
         default: Default value if input is not provided
-        
+
     Returns:
         The input value
-        
+
     Raises:
         ValueError: If required input is missing
     """
     # GitHub Actions sets inputs as environment variables with INPUT_ prefix
     env_name = f"INPUT_{name.upper()}"
     value = os.environ.get(env_name, default)
-    
+
     if required and not value:
         raise ValueError(f"Required input '{name}' is missing")
-    
+
     return value
 
 
 def set_output(name: str, value: str) -> None:
     """
     Set an output value for GitHub Actions.
-    
+
     Args:
         name: Name of the output parameter
         value: Value to set
@@ -53,7 +51,7 @@ def set_output(name: str, value: str) -> None:
 def log_info(message: str) -> None:
     """
     Log an info message in GitHub Actions format.
-    
+
     Args:
         message: Message to log
     """
@@ -63,7 +61,7 @@ def log_info(message: str) -> None:
 def log_warning(message: str) -> None:
     """
     Log a warning message in GitHub Actions format.
-    
+
     Args:
         message: Message to log
     """
@@ -73,7 +71,7 @@ def log_warning(message: str) -> None:
 def log_error(message: str) -> None:
     """
     Log an error message in GitHub Actions format.
-    
+
     Args:
         message: Message to log
     """
@@ -83,7 +81,7 @@ def log_error(message: str) -> None:
 def get_github_context() -> dict:
     """
     Get GitHub context information from environment variables.
-    
+
     Returns:
         Dictionary containing GitHub context information
     """
@@ -104,8 +102,8 @@ def get_github_context() -> dict:
 def is_github_actions() -> bool:
     """
     Check if the code is running in GitHub Actions.
-    
+
     Returns:
         True if running in GitHub Actions, False otherwise
     """
-    return os.environ.get("GITHUB_ACTIONS") == "true" 
+    return os.environ.get("GITHUB_ACTIONS") == "true"
