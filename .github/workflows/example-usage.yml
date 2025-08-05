@@ -1,0 +1,37 @@
+name: Example Usage
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  example:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Run Python Action Template
+      uses: ./
+      with:
+        input1: "Hello from GitHub Actions!"
+        input2: "This is an optional input"
+      id: action-step
+      
+    - name: Display outputs
+      run: |
+        echo "Action completed successfully!"
+        echo "Output 1: ${{ steps.action-step.outputs.output1 }}"
+        echo "Output 2: ${{ steps.action-step.outputs.output2 }}"
+        
+    - name: Use outputs in subsequent steps
+      run: |
+        if [ "${{ steps.action-step.outputs.output1 }}" != "" ]; then
+          echo "Output 1 is not empty"
+        fi
+        
+        if [ "${{ steps.action-step.outputs.output2 }}" != "" ]; then
+          echo "Output 2 is not empty"
+        fi 

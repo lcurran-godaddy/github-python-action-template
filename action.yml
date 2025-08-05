@@ -1,0 +1,44 @@
+name: 'Python GitHub Action Template'
+description: 'A template for creating Python-based GitHub Actions'
+author: 'Your Name'
+
+inputs:
+  input1:
+    description: 'First input parameter'
+    required: true
+    default: 'default_value'
+  input2:
+    description: 'Second input parameter (optional)'
+    required: false
+    default: ''
+
+outputs:
+  output1:
+    description: 'First output value'
+  output2:
+    description: 'Second output value'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: 'Checkout code'
+      uses: actions/checkout@v4
+      
+    - name: 'Set up Python'
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+        
+    - name: 'Install dependencies'
+      shell: bash
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        
+    - name: 'Run Python action'
+      shell: python
+      run: |
+        import sys
+        sys.path.append('.')
+        from src.main import main
+        main() 
